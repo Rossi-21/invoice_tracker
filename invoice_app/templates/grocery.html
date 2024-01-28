@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container p-5">
+    <!-- Links -->
+    {% include 'links.html' %}
+    <!-- Chart -->
+    <div class="card card-border border-dark">
+        <div style="width: 100%;">
+            <div>
+                <canvas id="storeSuppliesLineChart"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const dates = [{% for date in dates %}'{{ date }}',{% endfor %}];
+                const invoice_totals = [{% for total in invoice_totals %}{{ total }},{% endfor %}];
+        
+                const ctxStoreSuppliesLineChart = document.getElementById('storeSuppliesLineChart');
+                new Chart(ctxStoreSuppliesLineChart, {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'Invoice Total - Grocery',
+                            data: invoice_totals,
+                            fill: false,
+                            borderColor: 'red',
+                        }],
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date',
+                                },
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Invoice Total',
+                                },
+                            },
+                        },
+                    },
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

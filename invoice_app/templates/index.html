@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container p-5">
+    <div class="card border border-dark">
+        <div class="card-header">
+            <h2>Filter</h2>
+        </div>
+        <div class="card-body">
+            <!-- Filter Invoices Form -->
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </form>
+        </div>    
+    </div>
+    <!-- Links -->
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'create-invoice' %}">+Invoice</a>
+        <a  href="{% url 'invoice-total-view' %}">View Data</a>
+    </div>
+    <div class="card border border-dark">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2>Invoices</h2>
+            <!-- Display Total Sum -->
+            {% if total_sum %}
+                <h2>Total: ${{ total_sum }}</h2>
+            {% endif %}  
+        </div>
+        <!-- Display Filtered Invoices -->
+        <div class="card-body">
+            {% if invoices %}
+                <table id="invoiceTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Vendor</th>
+                            <th>Department</th>
+                            <th>Invoice Total</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for invoice in invoices %}
+                            <tr>
+                                <td>{{ invoice.date }}</td>
+                                <td>{{ invoice.vendor }}</td>
+                                <td>{{ invoice.department }}</td>
+                                <td>${{ invoice.total }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No invoices match the selected criteria.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

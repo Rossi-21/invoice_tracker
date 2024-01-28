@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container p-5">
+    <!-- Links -->
+    {% include 'links.html' %}
+    <!-- Chart -->
+    <div class="card card-border border-dark">
+        <div style="width: 100%;">
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+            const ctx = document.getElementById('myChart');
+            const vendor_name = [{% for label in vendor_labels %}'{{ label }}',{% endfor %}];
+            const total = [{% for total in total_sums %}{{ total }},{% endfor %}];
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: vendor_name ,
+                datasets: [{
+                    label: 'Total Spend',
+                    data: total ,
+                    backgroundColor: 'blue',
+                    borderWidth: 1
+                }]
+            },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+            </script> 
+        </div>
+    </div>
+</div>
+
+{% endblock %}
