@@ -15,29 +15,25 @@ Django (version 3.0 or higher)
 Installation
 
 Clone the repository:
-bash
-Copy code
 git clone https://github.com/Rossi-21/invoice-tracking-app.git
 
 Install the required dependencies:
-bash
-Copy code
 pip install -r requirements.txt
 
 Apply migrations:
-bash
-Copy code
 python manage.py migrate
 
+Create Superuser:
+python manage.py createsuperuser
+
 Run the development server:
-bash
-Copy code
 python manage.py runserver
 Open the app in your web browser: http://localhost:8000
 
 Usage
 Access the home page to filter and view invoices.
 Create new invoices using the "+Invoice" link.
+Invoices can be edited or deleted via the admin panel
 Visualize total spend by vendor and department through the provided links.
 
 Code Structure
