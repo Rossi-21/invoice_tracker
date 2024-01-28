@@ -1,4 +1,4 @@
-Invoice Tracking and Filtering App
+**Invoice Tracking and Filtering App**
 Overview
 The Invoice Tracking and Filtering App is a web-based application developed using Django and Chartjs, designed to help users manage and filter invoices efficiently. The app provides features for creating invoices, filtering them based on various criteria, and visualizing the data through graphs.
 
