@@ -11,7 +11,7 @@ class Invoice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.vendor)
+        return f'{self.vendor} - Total: {self.total}'
 
 
 class Vendor(models.Model):

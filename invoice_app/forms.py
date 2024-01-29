@@ -10,17 +10,17 @@ class InvoiceCreateForm(ModelForm):
         # Choose the fields you want to show
         fields = ['vendor', 'department', 'total', 'date']
 
-        # Apply Bootstrap CSS
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['department'].widget.attrs.update(
-                {'class': 'form-control'})
-            self.fields['vendor'].widget.attrs.update(
-                {'class': 'form-control'})
-            self.fields['total'].widget.attrs.update(
-                {'class': 'form-control'})
-            self.fields['date'].widget.attrs.update(
-                {'class': 'form-control'})
+        widgets = {
+            'vendor': forms.Select(attrs={'class': 'form-control'}),
+            'department': forms.Select(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
+
+    total = forms.DecimalField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_digits=10,
+        decimal_places=2
+    )
 
 
 class InvoiceFilterForm(forms.Form):
