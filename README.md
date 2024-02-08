@@ -17,7 +17,7 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 - Python (version 3.6 or higher)
 - Django (version 3.0 or higher)
 
-### **Installation**
+## **Installation**
 
 ### **Clone the repository:**
 
@@ -31,19 +31,19 @@ pip install -r requirements.txt
 
 ```
 python manage.py migrate
-
 ```
 
 ### **Create Superuser:**
 
 ```
 python manage.py createsuperuser
-
 ```
 
 ### **Run the development server:**
 
-- `python manage.py runserver`
+- ```
+  python manage.py runserver
+  ```
 - Open the app in your web browser: http://localhost:8000
 
 ### **Usage**
