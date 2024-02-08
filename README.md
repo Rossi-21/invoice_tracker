@@ -1,14 +1,14 @@
-**Invoice Tracking and Filtering App**
+#Invoice Tracking and Filtering App
 
-**Overview**
+##Overview
 The Invoice Tracking and Filtering App is a web-based application developed using Django and Chartjs, designed to help users manage and filter invoices efficiently. The app provides features for creating invoices, filtering them based on various criteria, and visualizing the data through graphs.
 
-**Features**
-Filtering: Users can filter invoices based on department, date range, and vendor name.
-Total Calculation: The app calculates and displays the total sum of the filtered invoices.
-Graph Visualization: Graphs are generated to visualize total spend by vendor and department.
+##Features
+*Filtering: Users can filter invoices based on department, date range, and vendor name.
+*Total Calculation: The app calculates and displays the total sum of the filtered invoices.
+\*Graph Visualization: Graphs are generated to visualize total spend by vendor and department.
 
-**Getting Started**
+##**Getting Started**
 
 **Prerequisites**
 Python (version 3.6 or higher)
