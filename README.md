@@ -12,42 +12,58 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 
 ## **Getting Started**
 
-**Prerequisites**
-Python (version 3.6 or higher)
-Django (version 3.0 or higher)
+### **Prerequisites**
 
-**Installation**
+- Python (version 3.6 or higher)
+- Django (version 3.0 or higher)
 
-**Clone the repository:**
+### **Installation**
+
+### **Clone the repository:**
+
 git clone https://github.com/Rossi-21/invoice-tracking-app.git
 
-**Install the required dependencies:**
+### **Install the required dependencies:**
+
 pip install -r requirements.txt
 
-**Apply migrations:**
+### **Apply migrations:**
+
+```
 python manage.py migrate
 
-**Create Superuser:**
+```
+
+### **Create Superuser:**
+
+```
 python manage.py createsuperuser
 
-**Run the development server:**
-python manage.py runserver
-Open the app in your web browser: http://localhost:8000
+```
 
-**Usage**
-Access the home page to filter and view invoices.
-Create new invoices using the "+Invoice" link.
-Invoices can be edited or deleted via the admin panel
-Visualize total spend by vendor and department through the provided links.
+### **Run the development server:**
 
-**Code Structure**
+- `python manage.py runserver`
+- Open the app in your web browser: http://localhost:8000
+
+### **Usage**
+
+- Access the home page to filter and view invoices.
+- Create new invoices using the "+Invoice" link.
+- Invoices can be edited or deleted via the admin panel
+- Visualize total spend by vendor and department through the provided links.
+
+### **Code Structure**
+
 views.py: Contains the views for home, invoice creation, and various data visualizations.
 forms.py: Defines forms for creating and filtering invoices.
 models.py: Defines the data models for invoices, vendors, and departments.
 templates: Contains HTML templates for rendering pages.
 
-**Contributing**
+### **Contributing**
+
 Contributions are not accepted at this time.
 
-**License**
+### **License**
+
 This project is licensed under the MIT License.
