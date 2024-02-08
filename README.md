@@ -27,7 +27,9 @@ git clone https://github.com/Rossi-21/invoice-tracking-app.git
 
 ### **Install the required dependencies:**
 
+```
 pip install -r requirements.txt
+```
 
 ### **Apply migrations:**
 
