@@ -21,7 +21,9 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 
 ### **Clone the repository:**
 
+```
 git clone https://github.com/Rossi-21/invoice-tracking-app.git
+```
 
 ### **Install the required dependencies:**
 
