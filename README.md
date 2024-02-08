@@ -55,10 +55,10 @@ python manage.py createsuperuser
 
 ### **Code Structure**
 
-views.py: Contains the views for home, invoice creation, and various data visualizations.
-forms.py: Defines forms for creating and filtering invoices.
-models.py: Defines the data models for invoices, vendors, and departments.
-templates: Contains HTML templates for rendering pages.
+- **_views.py_**: Contains the views for home, invoice creation, and various data visualizations.
+- forms.py: Defines forms for creating and filtering invoices.
+- models.py: Defines the data models for invoices, vendors, and departments.
+- templates: Contains HTML templates for rendering pages.
 
 ### **Contributing**
 
