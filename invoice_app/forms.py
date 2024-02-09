@@ -36,6 +36,18 @@ class DepartmentCreateForm(ModelForm):
         }
 
 
+class VendorCreateForm(ModelForm):
+    class Meta:
+        # Select your model
+        model = Vendor
+        # Choose the fields you want to show
+        fields = ['name']
+        # Apply Bootstrap CSS
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
 class InvoiceFilterForm(forms.Form):
     # Set the form fields
     department = forms.ModelChoiceField(queryset=Department.objects.all(

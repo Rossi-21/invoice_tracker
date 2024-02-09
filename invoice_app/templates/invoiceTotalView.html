@@ -11,28 +11,31 @@
             </div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-            const ctx = document.getElementById('myChart');
-            const vendor_name = [{% for label in vendor_labels %}'{{ label }}',{% endfor %}];
-            const total = [{% for total in total_sums %}{{ total }},{% endfor %}];
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                labels: vendor_name ,
-                datasets: [{
-                    label: 'Total Spend',
-                    data: total ,
-                    backgroundColor: 'blue',
-                    borderWidth: 1
-                }]
-            },
-                options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
+                const ctx = document.getElementById('myChart');
+                const vendor_name = [{% for label in vendor_labels %}'{{ label }}',{% endfor %}];
+                const total = [{% for total in total_sums %}{{ total }},{% endfor %}];
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                    labels: vendor_name ,
+                    datasets: [{
+                        label: 'Total Spend by Invoice',
+                        data: total ,
+                        backgroundColor: 'blue',
+                        borderWidth: 1
+                    }]
+                },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                },
+                            }   
+                        }
                     }
-                }
-                }
-            });
+                });
             </script> 
         </div>
     </div>

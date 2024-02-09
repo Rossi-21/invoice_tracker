@@ -6,6 +6,7 @@ from .forms import *
 
 
 def home(request):
+    departments = Department.objects.all()
     # Get all invoices for the Database
     invoices = Invoice.objects.all()
     # Select form from forms.py for the view
@@ -42,11 +43,13 @@ def home(request):
         'invoices': invoices,
         'form': form,
         'total_sum': total_sum,
+        'departments': departments,
     }
     return render(request, 'index.html', context)
 
 
 def createInvoice(request):
+    departments = Department.objects.all()
     # Select form from forms.py for the view
     form = InvoiceCreateForm()
     # Get the last three invoices form the database
@@ -63,12 +66,14 @@ def createInvoice(request):
 
     context = {
         'form': form,
-        'invoices': invoices
+        'invoices': invoices,
+        'departments': departments,
     }
     return render(request, 'createInvoice.html', context)
 
 
 def createDepartment(request):
+    departments = Department.objects.all()
     # Select form from forms.py for the view
     form = DepartmentCreateForm()
 
@@ -83,8 +88,30 @@ def createDepartment(request):
 
     context = {
         'form': form,
+        'departments': departments,
     }
     return render(request, 'createDepartment.html', context)
+
+
+def createVendor(request):
+    departments = Department.objects.all()
+    # Select form from forms.py for the view
+    form = VendorCreateForm()
+
+    if request.method == 'POST':
+        # Grab the form for processing
+        form = VendorCreateForm(request.POST)
+        if form.is_valid():
+            # If the form is valid save it to the database
+            form.save()
+            messages.success(request, 'Vendor created successfully!')
+            return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+        'form': form,
+        'departments': departments,
+    }
+    return render(request, 'createVendor.html', context)
 
 
 def invoiceTotalView(request):
@@ -106,6 +133,7 @@ def invoiceTotalView(request):
 
 
 def invoiceDepartmentView(request):
+    departments = Department.objects.all()
     # Calulate total spend for each department
     department_totals = Invoice.objects.values(
         'department__name').annotate(total_spend=Sum('total'))
@@ -116,12 +144,14 @@ def invoiceDepartmentView(request):
 
     context = {
         'department_labels': department_labels,
-        'total_spend': total_spend
+        'total_spend': total_spend,
+        'departments': departments,
     }
     return render(request, 'invoiceDepartmentView.html', context)
 
 
 def department_chart(request, department_name, template_name):
+    departments = Department.objects.all()
     # Get the Department
     department = Department.objects.get(name=department_name)
     # Retrieve invoices from the specified department
@@ -134,7 +164,8 @@ def department_chart(request, department_name, template_name):
     context = {
         'dates': dates,
         'invoice_totals': invoice_totals,
-        'department_name': department.name
+        'department_name': department.name,
+        'departments': departments,
     }
 
     return render(request, template_name, context)

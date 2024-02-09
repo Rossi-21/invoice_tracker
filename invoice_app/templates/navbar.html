@@ -16,6 +16,9 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{% url 'invoice-department-view' %}">Department Spend</a></li>
                     <li><a class="dropdown-item" href="{% url 'invoice-total-view' %}">Vendor Spend</a></li>
+                    {% for department in departments %}
+                        <li><a class="dropdown-item" href="">{{ department.name }} Spend</a></li>
+                    {% endfor %}
                 </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -24,7 +27,7 @@
                     </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{% url 'create-department' %}">Create Department</a></li>
-                    <li><a class="dropdown-item" href="#">Create Vendor</a></li>
+                    <li><a class="dropdown-item" href="{% url 'create-vendor' %}">Create Vendor</a></li>
                 </ul>
                 </li>
             </ul>
