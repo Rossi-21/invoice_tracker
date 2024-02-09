@@ -68,6 +68,7 @@ def createInvoice(request):
 
 
 def invoiceTotalView(request):
+    departments = Department.objects.all()
     # Aggregate data by vendor and calculate the sum of invoice totals
     vendor_totals = Invoice.objects.values(
         'vendor__name').annotate(total_sum=Sum('total'))
@@ -77,6 +78,7 @@ def invoiceTotalView(request):
     total_sums = [entry['total_sum'] for entry in vendor_totals]
 
     context = {
+        'departments': departments,
         'vendor_labels': vendor_labels,
         'total_sums': total_sums,
     }
