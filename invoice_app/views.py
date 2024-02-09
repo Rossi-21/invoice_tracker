@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
+from django.contrib import messages
 from .models import *
 from .forms import *
 
@@ -65,6 +66,25 @@ def createInvoice(request):
         'invoices': invoices
     }
     return render(request, 'createInvoice.html', context)
+
+
+def createDepartment(request):
+    # Select form from forms.py for the view
+    form = DepartmentCreateForm()
+
+    if request.method == 'POST':
+        # Grab the form for processing
+        form = DepartmentCreateForm(request.POST)
+        if form.is_valid():
+            # If the form is valid save it to the database
+            form.save()
+            messages.success(request, 'Department created successfully!')
+            return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'createDepartment.html', context)
 
 
 def invoiceTotalView(request):

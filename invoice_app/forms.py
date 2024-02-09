@@ -9,18 +9,31 @@ class InvoiceCreateForm(ModelForm):
         model = Invoice
         # Choose the fields you want to show
         fields = ['vendor', 'department', 'total', 'date']
-
+        # Apply Bootstrap CSS
         widgets = {
             'vendor': forms.Select(attrs={'class': 'form-control'}),
             'department': forms.Select(attrs={'class': 'form-control'}),
             'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
-
+    # Apply Bootstrap CSS and restrict to 10 digit input and 2 decimal places
     total = forms.DecimalField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_digits=10,
         decimal_places=2
     )
+
+
+class DepartmentCreateForm(ModelForm):
+    class Meta:
+        # Select your model
+        model = Department
+        # Choose the fields you want to show
+        fields = ['name', 'number']
+        # Apply Bootstrap CSS
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'number': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
 
 class InvoiceFilterForm(forms.Form):

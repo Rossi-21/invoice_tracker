@@ -6,13 +6,12 @@
             {% include 'navbar.html' %}
         </div>  
     </div>
-    
     <div class="card border border-dark">
         <div class="card-header">
-            <h2>+Invoice</h2>
+            <h2>Create Department</h2>
         </div>
         <div class="card-body">
-            <!-- Create Invoice Form -->
+            <!-- Create Department Form -->
             <form class="mb-3" method="POST">
                 {% csrf_token %}
                 <div class="">
@@ -21,18 +20,14 @@
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
-    </div>
-    <div>
-        <!-- Display three most recent Invoices -->
-        <table class="table table-bordered mt-3">
-            {% for invoice in invoices%}
-                <tr>
-                    <td>{{ invoice.vendor }}</td>
-                    <td>{{ invoice.department }}</td>
-                    <td>${{ invoice.total }}</td>
-                </tr>
-            {% endfor %}
-        </table>  
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+        {% endif %}
     </div>
 </div>
+
 {% endblock %}

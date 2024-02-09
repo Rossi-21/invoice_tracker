@@ -1,10 +1,10 @@
 {% extends 'main.html' %}
 {% block content %}
 <div class="container p-5">
-    <!-- Links -->
-    {% include 'links.html' %}
-    <!-- Chart -->
     <div class="card card-border border-dark">
+        <div class="card-header">
+            {% include 'navbar.html' %}
+        </div>
         <div style="width: 100%;">
             <div>
                 <canvas id="myChart"></canvas>
