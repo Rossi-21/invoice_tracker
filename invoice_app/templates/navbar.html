@@ -17,7 +17,7 @@
                     <li><a class="dropdown-item" href="{% url 'invoice-department-view' %}">Department Spend</a></li>
                     <li><a class="dropdown-item" href="{% url 'invoice-total-view' %}">Vendor Spend</a></li>
                     {% for department in departments %}
-                        <li><a class="dropdown-item" href="">{{ department.name }} Spend</a></li>
+                        <li><a class="dropdown-item" href="{% url 'department-spend-view' department.name %}">{{ department.name }} Spend</a></li>
                     {% endfor %}
                 </ul>
                 </li>

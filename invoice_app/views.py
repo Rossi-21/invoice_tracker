@@ -15,6 +15,7 @@ def home(request):
     total_sum = 0
 
     if request.method == 'POST':
+        departments = Department.objects.all()
         # Grab the form for processing
         form = InvoiceFilterForm(request.POST)
         if form.is_valid():
@@ -37,7 +38,7 @@ def home(request):
                 total_sum = round(filtered_invoices.aggregate(
                     Sum('total'))['total__sum'] or 0, 2)
 
-            return render(request, 'index.html', {'invoices': filtered_invoices, 'form': form, 'total_sum': total_sum})
+            return render(request, 'index.html', {'invoices': filtered_invoices, 'form': form, 'total_sum': total_sum, 'departments': departments})
 
     context = {
         'invoices': invoices,
@@ -150,7 +151,7 @@ def invoiceDepartmentView(request):
     return render(request, 'invoiceDepartmentView.html', context)
 
 
-def department_chart(request, department_name, template_name):
+def departmentSpendView(request, department_name):
     departments = Department.objects.all()
     # Get the Department
     department = Department.objects.get(name=department_name)
@@ -168,20 +169,4 @@ def department_chart(request, department_name, template_name):
         'departments': departments,
     }
 
-    return render(request, template_name, context)
-
-
-def storeSupplies(request):
-    return department_chart(request, 'Store Supplies', 'storeSupplies.html')
-
-
-def deli(request):
-    return department_chart(request, 'Deli', 'deli.html')
-
-
-def grocery(request):
-    return department_chart(request, 'Grocery', 'grocery.html')
-
-
-def meat(request):
-    return department_chart(request, 'Meat', 'meat.html')
+    return render(request, 'department_spend.html', context)

@@ -9,8 +9,6 @@ urlpatterns = [
     path('data/total', views.invoiceTotalView, name="invoice-total-view"),
     path('data/department', views.invoiceDepartmentView,
          name="invoice-department-view"),
-    path('data/storesupplies', views.storeSupplies, name="store-supplies"),
-    path('data/deli', views.deli, name="deli"),
-    path('data/grocery', views.grocery, name="grocery"),
-    path('data/meat', views.meat, name="meat"),
+    path('data/department/<str:department_name>', views.departmentSpendView,
+         name="department-spend-view"),
 ]

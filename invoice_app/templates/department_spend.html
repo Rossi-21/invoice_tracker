@@ -1,10 +1,10 @@
 {% extends 'main.html' %}
 {% block content %}
 <div class="container p-5">
-    <!-- Links  -->
-    {% include 'links.html' %}
-    <!-- Chart -->
     <div class="card card-border border-dark">
+        <div class="card-header">
+            {% include 'navbar.html' %}
+        </div> 
         <div style="width: 100%;">
             <div>
                 <canvas id="storeSuppliesLineChart"></canvas>
@@ -20,10 +20,10 @@
                     data: {
                         labels: dates,
                         datasets: [{
-                            label: 'Invoice Total - Deli',
+                            label: 'Invoice Total - {{ department_name}}',
                             data: invoice_totals,
                             fill: false,
-                            borderColor: 'green',
+                            borderColor: 'red',
                         }],
                     },
                     options: {
@@ -38,7 +38,7 @@
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Invoice Total',
+                                    text: 'Total',
                                 },
                             },
                         },
