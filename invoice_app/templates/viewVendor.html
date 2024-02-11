@@ -19,7 +19,7 @@
                 {% for vendor in vendors%}
                     <tr>
                         <td>{{ vendor.name }}</td>
-                        <td><a href="">edit</a></td>
+                        <td><a href="{% url 'update-vendor' vendor.id %}">edit</a></td>
                     </tr>
                 {% endfor %}
             </table> 

@@ -241,7 +241,7 @@ def updateVendor(request, id):
     form = VendorCreateForm(instance=vendor)
 
     if request.method == "POST":
-        form = DepartmentCreateForm(request.POST, instance=vendor)
+        form = VendorCreateForm(request.POST, instance=vendor)
 
         if form.is_valid():
             form.save()

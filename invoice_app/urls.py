@@ -15,5 +15,7 @@ urlpatterns = [
     path('veiw/vendor', views.viewVendor, name="view-vendor"),
     path('update/invoice/<int:id>', views.updateInvoice, name="update-invoice"),
     path('update/department/<int:id>',
-         views.updateDepartment, name="update-department")
+         views.updateDepartment, name="update-department"),
+    path('update/vendor/<int:id>',
+         views.updateVendor, name="update-vendor")
 ]
