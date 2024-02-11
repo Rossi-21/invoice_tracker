@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% block content  %}
+
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <h1>Register</h1>
+        <a href="{% url 'loginUser' %}">Login</a>
+    </div>
+    <div class="form-group">
+        <!-- Register User Form -->
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            {{ form.username.label_tag}}
+            {{ form.username }}
+            {{ form.username.errors }}
+
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+
+            {{ form.password1.label_tag}}
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        
+            {{ form.password2.label_tag}}
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+            <button class="btn btn-primary mt-3" type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

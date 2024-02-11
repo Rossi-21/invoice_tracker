@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Invoice(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     vendor = models.ForeignKey(
         'Vendor', on_delete=models.CASCADE, null=True, blank=True)
     department = models.ForeignKey(
