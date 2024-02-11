@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container p-5">
+    <div class="card border border-dark">
+        <div class="card-header">
+            {% include 'navbar.html' %}
+        </div>  
+    </div>
+    <div class="card border border-dark">
+        <div class="card-header">
+            <h2>Departments</h2>
+        </div>
+        <div class="p-2">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th></th>
+                </thead>
+                {% for department in departments%}
+                    <tr>
+                        <td>{{ department.number }}</td>
+                        <td>{{ department.name }}</td>
+                        <td><a href="{% url 'update-department' department.id %}">edit</a></td>
+                    </tr>
+                {% endfor %}
+            </table> 
+        </div> 
+    </div>
+</div>
+{% endblock %}

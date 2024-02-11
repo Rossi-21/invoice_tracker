@@ -170,3 +170,88 @@ def departmentSpendView(request, department_name):
     }
 
     return render(request, 'department_spend.html', context)
+
+
+def viewDepartment(request):
+    departments = Department.objects.all()
+    context = {
+        'departments': departments
+    }
+    return render(request, 'viewDepartment.html', context)
+
+
+def viewVendor(request):
+    departments = Department.objects.all()
+    vendors = Vendor.objects.all()
+
+    context = {
+        'vendors': vendors,
+        'departments': departments
+    }
+    return render(request, 'viewVendor.html', context)
+
+
+def updateInvoice(request, id):
+    departments = Department.objects.all()
+    invoice = Invoice.objects.get(id=id)
+    form = InvoiceCreateForm(instance=invoice)
+
+    if request.method == "POST":
+        form = InvoiceCreateForm(request.POST, instance=invoice)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("home")
+
+    context = {
+        'departments': departments,
+        'invoice': invoice,
+        'form': form,
+
+    }
+    return render(request, 'updateInvoice.html', context)
+
+
+def updateDepartment(request, id):
+    departments = Department.objects.all()
+    department = Department.objects.get(id=id)
+    form = DepartmentCreateForm(instance=department)
+
+    if request.method == "POST":
+        form = DepartmentCreateForm(request.POST, instance=department)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("view-department")
+
+    context = {
+        'departments': departments,
+        'department': department,
+        'form': form,
+
+    }
+    return render(request, 'updateDepartment.html', context)
+
+
+def updateVendor(request, id):
+    departments = Department.objects.all()
+    vendor = Vendor.objects.get(id=id)
+    form = VendorCreateForm(instance=vendor)
+
+    if request.method == "POST":
+        form = DepartmentCreateForm(request.POST, instance=vendor)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("view-vendor")
+
+    context = {
+        'departments': departments,
+        'vendor': vendor,
+        'form': form,
+
+    }
+    return render(request, 'updateVendor.html', context)

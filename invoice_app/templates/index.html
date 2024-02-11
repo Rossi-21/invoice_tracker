@@ -33,6 +33,7 @@
                             <th>Vendor</th>
                             <th>Department</th>
                             <th>Invoice Total</th> 
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@
                                 <td>{{ invoice.vendor }}</td>
                                 <td>{{ invoice.department }}</td>
                                 <td>${{ invoice.total }}</td>
+                                <td><a href="{% url 'update-invoice' invoice.id %}">edit</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -11,4 +11,9 @@ urlpatterns = [
          name="invoice-department-view"),
     path('data/department/<str:department_name>', views.departmentSpendView,
          name="department-spend-view"),
+    path('view/department', views.viewDepartment, name="view-department"),
+    path('veiw/vendor', views.viewVendor, name="view-vendor"),
+    path('update/invoice/<int:id>', views.updateInvoice, name="update-invoice"),
+    path('update/department/<int:id>',
+         views.updateDepartment, name="update-department")
 ]
