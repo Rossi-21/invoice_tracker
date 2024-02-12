@@ -2,28 +2,30 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="d-flex align-items-center justify-content-between">
-        <h1>Login</h1>
-        <!-- Link to the registration page -->
-        <a href="{% url 'registerUser' %}">Register</a>
+    <div class="card card-border border-dark">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h1>Filter App Login</h1>
+            <!-- Link to the registration page -->
+            <a href="{% url 'registerUser' %}">Register</a>
+        </div>
+        <div class="card-body form-group">
+            <!-- Login Form -->
+            <form action="" method="POST">
+                <!-- Dispaly Error messages -->
+                {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                {% endfor %}
+    
+                {% csrf_token %}
+    
+                <label class="form-label" for="username">Username:</label>
+                <input class="form-control" type="text" name="username" id="username">
+                <label class="from-label" for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password">
+                <button class="btn btn-secondary mt-3" type="submit">Login</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <!-- Login Form -->
-        <form action="" method="POST">
-            <!-- Dispaly Error messages -->
-            {% for message in messages %}
-                <p class="text-danger">{{message}}</p>
-            {% endfor %}
-
-            {% csrf_token %}
-
-            <label class="form-label" for="username">Username:</label>
-            <input class="form-control" type="text" name="username" id="username">
-            <label class="from-label" for="password">Password:</label>
-            <input class="form-control" type="password" name="password" id="password">
-            <button class="btn btn-secondary mt-3" type="submit">Login</button>
-        </form>
     </div>
-</div>
 
 {% endblock %}
