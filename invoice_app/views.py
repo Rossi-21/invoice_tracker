@@ -64,6 +64,9 @@ def createInvoice(request):
         # Grab the form for processing
         form = InvoiceCreateForm(request.POST)
         if form.is_valid():
+            invoice = form.save(commit=False)
+            # Associate the current User with the department being created
+            invoice.user = request.user
             # If the form is valid save it to the database
             form.save()
 
@@ -79,7 +82,7 @@ def createInvoice(request):
 
 @login_required
 def createDepartment(request):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Select form from forms.py for the view
     form = DepartmentCreateForm()
 
@@ -87,9 +90,13 @@ def createDepartment(request):
         # Grab the form for processing
         form = DepartmentCreateForm(request.POST)
         if form.is_valid():
+            department = form.save(commit=False)
+            # Associate the current User with the department being created
+            department.user = request.user
             # If the form is valid save it to the database
             form.save()
             messages.success(request, 'Department created successfully!')
+            print(form)
             return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
@@ -101,7 +108,7 @@ def createDepartment(request):
 
 @login_required
 def createVendor(request):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Select form from forms.py for the view
     form = VendorCreateForm()
 
@@ -109,6 +116,9 @@ def createVendor(request):
         # Grab the form for processing
         form = VendorCreateForm(request.POST)
         if form.is_valid():
+            vendor = form.save(commit=False)
+            # Associate the current User with the department being created
+            vendor.user = request.user
             # If the form is valid save it to the database
             form.save()
             messages.success(request, 'Vendor created successfully!')
@@ -123,9 +133,9 @@ def createVendor(request):
 
 @login_required
 def invoiceTotalView(request):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Aggregate data by vendor and calculate the sum of invoice totals
-    vendor_totals = Invoice.objects.values(
+    vendor_totals = Invoice.objects.filter(user=request.user).values(
         'vendor__name').annotate(total_sum=Sum('total'))
 
     # Extract labels and data for Chart.js
@@ -142,9 +152,9 @@ def invoiceTotalView(request):
 
 @login_required
 def invoiceDepartmentView(request):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Calulate total spend for each department
-    department_totals = Invoice.objects.values(
+    department_totals = Invoice.objects.filter(user=request.user).values(
         'department__name').annotate(total_spend=Sum('total'))
     # Extract data for Chart.js
     department_labels = [entry['department__name']
@@ -161,9 +171,10 @@ def invoiceDepartmentView(request):
 
 @login_required
 def departmentSpendView(request, department_name):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Get the Department
-    department = Department.objects.get(name=department_name)
+    department = Department.objects.filter(
+        user=request.user).get(name=department_name)
     # Retrieve invoices from the specified department
     invoices = Invoice.objects.filter(department=department).order_by('date')
 
@@ -183,8 +194,12 @@ def departmentSpendView(request, department_name):
 
 @login_required
 def viewDepartment(request):
-    departments = Department.objects.all()
+    user = request.user
+    print(user)
+    departments = Department.objects.filter(user=request.user)
+    print(departments)
     context = {
+        'user': user,
         'departments': departments
     }
     return render(request, 'viewDepartment.html', context)
@@ -192,8 +207,8 @@ def viewDepartment(request):
 
 @login_required
 def viewVendor(request):
-    departments = Department.objects.all()
-    vendors = Vendor.objects.all()
+    departments = Department.objects.filter(user=request.user)
+    vendors = Vendor.objects.filter(user=request.user)
 
     context = {
         'vendors': vendors,
@@ -204,7 +219,7 @@ def viewVendor(request):
 
 @login_required
 def updateInvoice(request, id):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     invoice = Invoice.objects.get(id=id)
     form = InvoiceCreateForm(instance=invoice)
 
@@ -227,7 +242,7 @@ def updateInvoice(request, id):
 
 @login_required
 def updateDepartment(request, id):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     department = Department.objects.get(id=id)
     form = DepartmentCreateForm(instance=department)
 
@@ -250,7 +265,7 @@ def updateDepartment(request, id):
 
 @login_required
 def updateVendor(request, id):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     vendor = Vendor.objects.get(id=id)
     form = VendorCreateForm(instance=vendor)
 
