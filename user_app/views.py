@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 # email imports
@@ -10,6 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 # Internal imports
+from invoice_app.models import *
 from .models import *
 from .forms import *
 
@@ -67,6 +69,49 @@ def loginUser(request):
             messages.info(request, 'Username or Password is incorrect')
 
     return render(request, 'login.html')
+
+
+@login_required
+def viewUser(request, id):
+    departments = Department.objects.filter(user=request.user)
+    user = User.objects.get(id=id)
+    profile = Profile.objects.get(id=request.user.id)
+
+    context = {
+        'user': user,
+        'departments': departments,
+        'profile': profile,
+    }
+
+    return render(request, 'viewUser.html', context)
+
+
+@login_required
+def updateUser(request, id):
+    departments = Department.objects.filter(user=request.user)
+    user = User.objects.get(id=id)
+    profile = Profile.objects.get(id=request.user.id)
+    form = CreateUserForm(instance=user)
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST or None, instance=user)
+
+        if form.is_valid():
+            # Save the edited form to the database
+            form.save()
+            # Login the user
+            login(request, user)
+            # return to the View User page
+            return redirect(reverse('view-user', args=[user.id]))
+
+    context = {
+        'user': user,
+        'departments': departments,
+        'profile': profile,
+        'form': form,
+    }
+
+    return render(request, 'updateUser.html', context)
 
 
 @login_required

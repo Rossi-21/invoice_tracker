@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container p-5">
+    <div class="card border border-dark">
+        <div class="card-header">
+            {% include 'navbar.html' %}
+        </div>  
+    </div>
+    
+    <div class="card border border-dark">
+        <div class="card-header">
+            <h2>Update {{request.user}}</h2>
+        </div>
+        <div class="card-body">
+            <!-- Form -->
+            <form class="m-3" method="POST" action="">
+                {% csrf_token %}
+
+                {{ form.username.label_tag}}
+                {{ form.username }}
+                {{ form.username.errors }}
+
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+
+                {{ form.password1.label_tag}}
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+
+                {{ form.password2.label_tag}}
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+
+                <button class="btn btn-success mt-3" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

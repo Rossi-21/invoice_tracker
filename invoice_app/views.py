@@ -56,13 +56,13 @@ def home(request):
 def createInvoice(request):
     departments = Department.objects.filter(user=request.user)
     # Select form from forms.py for the view
-    form = InvoiceCreateForm()
+    form = InvoiceCreateForm(user=request.user)
     # Get the last three invoices form the database
     invoices = Invoice.objects.filter(user=request.user).order_by('-id')[:3]
 
     if request.method == 'POST':
         # Grab the form for processing
-        form = InvoiceCreateForm(request.POST)
+        form = InvoiceCreateForm(request.POST, user=request.user)
         if form.is_valid():
             invoice = form.save(commit=False)
             # Associate the current User with the department being created

@@ -22,6 +22,16 @@ class InvoiceCreateForm(ModelForm):
         decimal_places=2
     )
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        # Filter vendors and departments based on the logged-in user
+        if user:
+            self.fields['vendor'].queryset = Vendor.objects.filter(user=user)
+            self.fields['department'].queryset = Department.objects.filter(
+                user=user)
+
 
 class DepartmentCreateForm(ModelForm):
     class Meta:
