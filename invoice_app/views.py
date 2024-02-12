@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .models import *
 from .forms import *
 
 
+@login_required
 def home(request):
-    departments = Department.objects.all()
-    # Get all invoices for the Database
-    invoices = Invoice.objects.all()
+    departments = Department.objects.filter(user=request.user)
+    # Get all invoices from the Database
+    invoices = Invoice.objects.filter(user=request.user)
     # Select form from forms.py for the view
     form = InvoiceFilterForm()
     # Sum Variable
@@ -49,12 +52,13 @@ def home(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def createInvoice(request):
-    departments = Department.objects.all()
+    departments = Department.objects.filter(user=request.user)
     # Select form from forms.py for the view
     form = InvoiceCreateForm()
     # Get the last three invoices form the database
-    invoices = Invoice.objects.order_by('-id')[:3]
+    invoices = Invoice.objects.filter(user=request.user).order_by('-id')[:3]
 
     if request.method == 'POST':
         # Grab the form for processing
@@ -73,6 +77,7 @@ def createInvoice(request):
     return render(request, 'createInvoice.html', context)
 
 
+@login_required
 def createDepartment(request):
     departments = Department.objects.all()
     # Select form from forms.py for the view
@@ -94,6 +99,7 @@ def createDepartment(request):
     return render(request, 'createDepartment.html', context)
 
 
+@login_required
 def createVendor(request):
     departments = Department.objects.all()
     # Select form from forms.py for the view
@@ -115,6 +121,7 @@ def createVendor(request):
     return render(request, 'createVendor.html', context)
 
 
+@login_required
 def invoiceTotalView(request):
     departments = Department.objects.all()
     # Aggregate data by vendor and calculate the sum of invoice totals
@@ -133,6 +140,7 @@ def invoiceTotalView(request):
     return render(request, 'invoiceTotalView.html', context)
 
 
+@login_required
 def invoiceDepartmentView(request):
     departments = Department.objects.all()
     # Calulate total spend for each department
@@ -151,6 +159,7 @@ def invoiceDepartmentView(request):
     return render(request, 'invoiceDepartmentView.html', context)
 
 
+@login_required
 def departmentSpendView(request, department_name):
     departments = Department.objects.all()
     # Get the Department
@@ -172,6 +181,7 @@ def departmentSpendView(request, department_name):
     return render(request, 'department_spend.html', context)
 
 
+@login_required
 def viewDepartment(request):
     departments = Department.objects.all()
     context = {
@@ -180,6 +190,7 @@ def viewDepartment(request):
     return render(request, 'viewDepartment.html', context)
 
 
+@login_required
 def viewVendor(request):
     departments = Department.objects.all()
     vendors = Vendor.objects.all()
@@ -191,6 +202,7 @@ def viewVendor(request):
     return render(request, 'viewVendor.html', context)
 
 
+@login_required
 def updateInvoice(request, id):
     departments = Department.objects.all()
     invoice = Invoice.objects.get(id=id)
@@ -213,6 +225,7 @@ def updateInvoice(request, id):
     return render(request, 'updateInvoice.html', context)
 
 
+@login_required
 def updateDepartment(request, id):
     departments = Department.objects.all()
     department = Department.objects.get(id=id)
@@ -235,6 +248,7 @@ def updateDepartment(request, id):
     return render(request, 'updateDepartment.html', context)
 
 
+@login_required
 def updateVendor(request, id):
     departments = Department.objects.all()
     vendor = Vendor.objects.get(id=id)

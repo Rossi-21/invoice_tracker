@@ -37,6 +37,12 @@
                     <li><a class="dropdown-item" href="{% url 'view-vendor' %}">Vendors</a></li>
                 </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" >Hello, {{request.user}}!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logoutUser' %}">Logout</a>
+                </li>
             </ul>
         </div>
     </div>

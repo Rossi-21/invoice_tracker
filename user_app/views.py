@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
+
 
 # email imports
 from django.core.mail import send_mail
@@ -48,5 +47,31 @@ def registerUser(request):
     return render(request, 'register.html', context)
 
 
+# Login user function
 def loginUser(request):
-    return (request, login.html)
+    if request.method == "POST":
+        # Get the username and password from the database
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # Verify the username and password
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # If the user exists log them in
+            login(request, user)
+            # Redirect to the dashboard
+            return redirect('home')
+
+        else:
+            # If the user does not exist, display an error message
+            messages.info(request, 'Username or Password is incorrect')
+
+    return render(request, 'login.html')
+
+
+@login_required
+def logoutUser(request):
+    # Logout the User
+    logout(request)
+    # Send the User back to the Login page
+    return redirect('loginUser')

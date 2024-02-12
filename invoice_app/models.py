@@ -17,6 +17,7 @@ class Invoice(models.Model):
 
 
 class Vendor(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
 
     def __str__(self):
@@ -24,6 +25,7 @@ class Vendor(models.Model):
 
 
 class Department(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     number = models.IntegerField()
 
