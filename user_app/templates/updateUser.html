@@ -31,9 +31,11 @@
                 {{ form.password2.label_tag}}
                 {{ form.password2 }}
                 {{ form.password2.errors }}
-
-                <button class="btn btn-success mt-3" type="submit">Update</button>
+                <div>
+                    <button class="btn btn-success mt-3" type="submit">Update</button>
             </form>
+            <button class="btn btn-danger mt-3 ms-2" ><a class="text-light text-decoration-none" href="{% url 'delete-check' %}">Delete</a></button>
+                </div>
         </div>
     </div>
 </div>

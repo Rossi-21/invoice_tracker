@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 # email imports
@@ -120,3 +121,18 @@ def logoutUser(request):
     logout(request)
     # Send the User back to the Login page
     return redirect('loginUser')
+
+
+@login_required
+def deleteCheck(request):
+    return render(request, 'deleteUser.html')
+
+
+@login_required
+def deleteUser(request, id):
+    # Get the invoice by id
+    user = User.objects.get(id=id)
+    # Remove the invoice from the database
+    user.delete()
+    # Send the User to the Dashboard
+    return redirect('registerUser')
