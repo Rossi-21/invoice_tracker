@@ -17,5 +17,10 @@ urlpatterns = [
     path('update/department/<int:id>',
          views.updateDepartment, name="update-department"),
     path('update/vendor/<int:id>',
-         views.updateVendor, name="update-vendor")
+         views.updateVendor, name="update-vendor"),
+    path('delete/invoice/<int:id>', views.deleteInvoice, name="delete-invoice"),
+    path('delete/department/<int:id>',
+         views.deleteDepartment, name="delete-department"),
+    path('delete/vendor/<int:id>',
+         views.deleteVendor, name="delete-vendor"),
 ]

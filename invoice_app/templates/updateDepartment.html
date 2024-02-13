@@ -18,8 +18,12 @@
                 <div class="">
                     {{form.as_p}}
                 </div>
-                <button class="btn btn-success" type="submit">Update</button>
-            </form>
+                <div class="d-flex">
+                    <button class="btn btn-success" type="submit">Update</button>
+                    </form>
+                    
+                    <button class="btn btn-danger ms-2" type="delete"><a class="text-light text-decoration-none" href="{% url 'delete-department' department.id %}">Delete</a></button>   
+                </div>
         </div>
     </div>
 </div>

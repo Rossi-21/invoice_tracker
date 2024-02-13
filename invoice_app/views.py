@@ -4,6 +4,7 @@ from django.utils import timezone
 from calendar import monthrange
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 from .models import *
 from .forms import *
@@ -330,3 +331,33 @@ def updateVendor(request, id):
 
     }
     return render(request, 'updateVendor.html', context)
+
+
+@login_required
+def deleteInvoice(request, id):
+    # Get the invoice by id
+    invoice = get_object_or_404(Invoice, id=id)
+    # Remove the invoice from the database
+    invoice.delete()
+    # Send the User to the Dashboard
+    return redirect('home')
+
+
+@login_required
+def deleteDepartment(request, id):
+    # Get the invoice by id
+    department = get_object_or_404(Department, id=id)
+    # Remove the invoice from the database
+    department.delete()
+    # Send the User to the Dashboard
+    return redirect('view-department')
+
+
+@login_required
+def deleteVendor(request, id):
+    # Get the invoice by id
+    vendor = get_object_or_404(Vendor, id=id)
+    # Remove the invoice from the database
+    vendor.delete()
+    # Send the User to the Dashboard
+    return redirect('view-vendor')

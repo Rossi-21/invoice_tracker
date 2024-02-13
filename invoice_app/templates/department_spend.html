@@ -6,23 +6,34 @@
             {% include 'navbar.html' %}
         </div> 
         <div style="width: 100%;">
-            <div class="p-3">
-                <div class="mb-3">
+            <div class="p-3 d-flex">
+                <div style="width: 25%;">
+
+                </div>
+                <div class="mb-3" style="width: 50%;">
                     <form id="updateChartForm" method="GET">
-                        <label for="monthDropdown" class="form-label">Select Month:</label>
-                        <select id="monthDropdown" class="form-select" name="month" onchange="submitForm()">
-                            {% for month in available_months %}
-                                <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month }}</option>
-                            {% endfor %}
-                        </select>
-                
-                        <label for="yearDropdown" class="form-label">Select Year:</label>
-                        <select id="yearDropdown" class="form-select" name="year" onchange="submitForm()">
-                            {% for year in available_years %}
-                                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
-                            {% endfor %}
-                        </select>
+                        <div class="d-flex justify-content-evenly">
+                            <div>
+                                <label for="monthDropdown" class="form-label">Select Month:</label>
+                                <select id="monthDropdown" class="form-select" name="month" onchange="submitForm()">
+                                    {% for month in available_months %}
+                                        <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <label for="yearDropdown" class="form-label">Select Year:</label>
+                                <select id="yearDropdown" class="form-select" name="year" onchange="submitForm()">
+                                    {% for year in available_years %}
+                                        <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                     </form>
+                </div>
+                <div style="width: 25%;">
+
                 </div>
                 <script>
                     // Function to submit the form when dropdowns are changed
