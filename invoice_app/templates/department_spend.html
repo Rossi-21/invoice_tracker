@@ -6,9 +6,42 @@
             {% include 'navbar.html' %}
         </div> 
         <div style="width: 100%;">
+            <div class="p-3">
+                <div class="mb-3">
+                    <form id="updateChartForm" method="GET">
+                        <label for="monthDropdown" class="form-label">Select Month:</label>
+                        <select id="monthDropdown" class="form-select" name="month" onchange="submitForm()">
+                            {% for month in available_months %}
+                                <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month }}</option>
+                            {% endfor %}
+                        </select>
+                
+                        <label for="yearDropdown" class="form-label">Select Year:</label>
+                        <select id="yearDropdown" class="form-select" name="year" onchange="submitForm()">
+                            {% for year in available_years %}
+                                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+                <script>
+                    // Function to submit the form when dropdowns are changed
+                    function submitForm() {
+                        document.getElementById('updateChartForm').submit();
+                    }
+                
+                    // Initialize the event listeners on page load
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Event listener for dropdown changes
+                        document.getElementById('monthDropdown').addEventListener('change', submitForm);
+                        document.getElementById('yearDropdown').addEventListener('change', submitForm);
+                    });
+                </script>
+            </div>
+        </div>
             <div>
                 <canvas id="storeSuppliesLineChart"></canvas>
-            </div>
+                
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 const dates = [{% for date in dates %}'{{ date }}',{% endfor %}];

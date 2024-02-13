@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
+from django.utils import timezone
+from calendar import monthrange
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -172,22 +174,66 @@ def invoiceDepartmentView(request):
 @login_required
 def departmentSpendView(request, department_name):
     departments = Department.objects.filter(user=request.user)
+    # Additional logic to handle year and month if not provided
+    year = request.GET.get('year', None)
+    month = request.GET.get('month', None)
+
+    if year is not None and month is not None:
+        date = timezone.datetime(int(year), int(month), 1)
+    else:
+        # Default to the current month and year if not provided
+        date = timezone.now()
+
     # Get the Department
     department = Department.objects.filter(
         user=request.user).get(name=department_name)
+
+    context = {}
+
+    # Filter invoices based on the selected month and year from the form submission
+    if request.method == 'GET':
+        selected_month = request.GET.get('month')
+        selected_year = request.GET.get('year')
+
+        if selected_month is not None and selected_year is not None:
+            start_date = timezone.datetime(
+                int(selected_year), int(selected_month), 1)
+            end_date = timezone.datetime(int(selected_year), int(selected_month), monthrange(
+                int(selected_year), int(selected_month))[1], 23, 59, 59)
+            invoices = Invoice.objects.filter(
+                department=department, date__range=(start_date, end_date)).order_by('date')
+
+            # Update the context with the selected month and year
+            context.update({
+                'selected_year': int(selected_year),
+                'selected_month': int(selected_month),
+            })
+
     # Retrieve invoices from the specified department
-    invoices = Invoice.objects.filter(department=department).order_by('date')
+    start_date = timezone.datetime(date.year, date.month, 1)
+    end_date = timezone.datetime(date.year, date.month, monthrange(
+        date.year, date.month)[1], 23, 59, 59)
+    invoices = Invoice.objects.filter(
+        department=department, date__range=(start_date, end_date)).order_by('date')
 
     # Extract data for Chart.js
     dates = [invoice.date.strftime('%m-%d') for invoice in invoices]
     invoice_totals = [invoice.total for invoice in invoices]
 
-    context = {
+    # Context data for the dropdowns
+    available_years = list(range(timezone.now().year, 2020, -1))
+    available_months = list(range(1, 13))
+
+    context.update({
         'dates': dates,
         'invoice_totals': invoice_totals,
         'department_name': department.name,
         'departments': departments,
-    }
+        'selected_year': date.year,
+        'selected_month': date.month,
+        'available_years': available_years,
+        'available_months': available_months,
+    })
 
     return render(request, 'department_spend.html', context)
 
