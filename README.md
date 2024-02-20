@@ -14,48 +14,26 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 
 ### **Prerequisites**
 
-- Python (version 3.6 or higher)
-- Django (version 3.0 or higher)
+- A working internet connection
 
-## **Installation**
+## **Registration**
 
-### **Clone the repository:**
-
-```
-git clone https://github.com/Rossi-21/invoice-tracking-app.git
-```
-
-### **Install the required dependencies:**
+### **Visit:**
 
 ```
-pip install -r requirements.txt
+http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com:8000/register/
 ```
 
-### **Apply migrations:**
-
-```
-python manage.py migrate
-```
-
-### **Create Superuser:**
-
-```
-python manage.py createsuperuser
-```
-
-### **Run the development server:**
-
-- ```
-  python manage.py runserver
-  ```
-- Open the app in your web browser: http://localhost:8000
+- Create a username
+- Enter a valid email address
+- Create a vaild password
 
 ### **Usage**
 
-- Use the Get Started dropdown to create Vendors and Departments
-- Create new invoices using the "+Invoice" link.
-- Invoices can be edited or deleted via the admin panel
-- Visualize total spend by vendor and department through the provided links.
+- Use the Get Started dropdown to create Vendors, Departments, and Invoices.
+- Invoices can be edited or deleted via the edit link on the home page.
+- Departments and Vendors can be edited using the View dropdown.
+- Visit the Data dropdown to visualize your spend.
 
 ### **Code Structure**
 
@@ -63,10 +41,6 @@ python manage.py createsuperuser
 - **forms.py**: Defines forms for creating and filtering invoices.
 - **models.py**: Defines the data models for invoices, vendors, and departments.
 - **templates**: Contains HTML templates for rendering pages.
-
-### **Contributing**
-
-Contributions are not accepted at this time.
 
 ### **License**
 
