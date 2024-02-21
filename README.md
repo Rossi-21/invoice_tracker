@@ -1,8 +1,12 @@
 # Invoice Tracking and Filtering App
 
-## Overview
+## About
 
 The Invoice Tracking and Filtering App is a web-based application developed using Django and Chartjs, designed to help users manage and filter invoices efficiently. The app provides features for creating invoices, vendors, and departments. Filtering invoices based on various criteria, and visualizing the data through graphs.
+
+## Why?
+
+"My team was tasked with controlling our supply spend for the year but was only given retroactive tools to visualize and understand our spend. I wanted something that could help me understand our spend in real-time so we could become more agile in our decision-making."
 
 ## Features
 
@@ -21,7 +25,7 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 ### **Visit:**
 
 ```
-http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/
+[Invoice Tracker][http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/]
 ```
 
 - Create a username
