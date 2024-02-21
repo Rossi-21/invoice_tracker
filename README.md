@@ -24,7 +24,7 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 
 ### **Visit:**
 
-[Invoice Tracker][http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/]
+[Invoice Tracker](http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/)
 
 - Create a username
 - Enter a valid email address
