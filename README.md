@@ -21,7 +21,7 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 ### **Visit:**
 
 ```
-http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com:8000/register/
+http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/
 ```
 
 - Create a username
@@ -41,7 +41,3 @@ http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com:8000/register/
 - **forms.py**: Defines forms for creating and filtering invoices.
 - **models.py**: Defines the data models for invoices, vendors, and departments.
 - **templates**: Contains HTML templates for rendering pages.
-
-### **License**
-
-This project is licensed under the MIT License.
