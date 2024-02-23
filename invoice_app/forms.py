@@ -71,6 +71,7 @@ class InvoiceFilterForm(forms.Form):
 
     # Apply Bootstrap CSS
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         self.fields['department'].widget.attrs.update(
             {'class': 'form-control'})
@@ -80,3 +81,8 @@ class InvoiceFilterForm(forms.Form):
             {'class': 'form-control'})
         self.fields['date_end'].widget.attrs.update(
             {'class': 'form-control'})
+        if user:
+            self.fields['vendor_name'].queryset = Vendor.objects.filter(
+                user=user)
+            self.fields['department'].queryset = Department.objects.filter(
+                user=user)
