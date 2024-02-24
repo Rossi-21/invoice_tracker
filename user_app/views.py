@@ -79,7 +79,7 @@ def loginUser(request):
 def viewUser(request, id):
     departments = Department.objects.filter(user=request.user)
     user = User.objects.get(id=id)
-    profile = Profile.objects.get(id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
 
     context = {
         'user': user,
@@ -95,7 +95,7 @@ def viewUser(request, id):
 def updateUser(request, id):
     departments = Department.objects.filter(user=request.user)
     user = User.objects.get(id=id)
-    profile = Profile.objects.get(id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     form = CreateUserForm(instance=user)
 
     if request.method == 'POST':
@@ -135,7 +135,7 @@ def deleteCheck(request):
 
 
 @login_required
-# Delete USer Function
+# Delete User Function
 def deleteUser(request, id):
     # Get the User by id
     user = User.objects.get(id=id)
