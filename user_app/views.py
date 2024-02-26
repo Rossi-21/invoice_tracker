@@ -16,6 +16,8 @@ from invoice_app.models import *
 from .models import *
 from .forms import *
 
+# Register User Function
+
 
 def registerUser(request):
     # Display the user creation form
@@ -50,7 +52,7 @@ def registerUser(request):
     return render(request, 'register.html', context)
 
 
-# Login user function
+# Login User function
 def loginUser(request):
     if request.method == "POST":
         # Get the username and password from the database
@@ -73,10 +75,11 @@ def loginUser(request):
 
 
 @login_required
+# View User function
 def viewUser(request, id):
     departments = Department.objects.filter(user=request.user)
     user = User.objects.get(id=id)
-    profile = Profile.objects.get(id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
 
     context = {
         'user': user,
@@ -88,10 +91,11 @@ def viewUser(request, id):
 
 
 @login_required
+# Update User function
 def updateUser(request, id):
     departments = Department.objects.filter(user=request.user)
     user = User.objects.get(id=id)
-    profile = Profile.objects.get(id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     form = CreateUserForm(instance=user)
 
     if request.method == 'POST':
@@ -116,6 +120,7 @@ def updateUser(request, id):
 
 
 @login_required
+# Logout User Function
 def logoutUser(request):
     # Logout the User
     logout(request)
@@ -124,15 +129,17 @@ def logoutUser(request):
 
 
 @login_required
+# Delete User Page
 def deleteCheck(request):
     return render(request, 'deleteUser.html')
 
 
 @login_required
+# Delete User Function
 def deleteUser(request, id):
-    # Get the invoice by id
+    # Get the User by id
     user = User.objects.get(id=id)
-    # Remove the invoice from the database
+    # Remove the User from the database
     user.delete()
     # Send the User to the Dashboard
     return redirect('registerUser')

@@ -16,14 +16,14 @@ def home(request):
     # Get all invoices from the Database
     invoices = Invoice.objects.filter(user=request.user)
     # Select form from forms.py for the view
-    form = InvoiceFilterForm()
+    form = InvoiceFilterForm(user=request.user)
     # Sum Variable
     total_sum = 0
 
     if request.method == 'POST':
         departments = Department.objects.all()
         # Grab the form for processing
-        form = InvoiceFilterForm(request.POST)
+        form = InvoiceFilterForm(request.POST, user=request.user)
         if form.is_valid():
             # Build the filter parameters based on form input
             filter_params = {}
@@ -242,9 +242,8 @@ def departmentSpendView(request, department_name):
 @login_required
 def viewDepartment(request):
     user = request.user
-    print(user)
     departments = Department.objects.filter(user=request.user)
-    print(departments)
+
     context = {
         'user': user,
         'departments': departments
@@ -268,10 +267,11 @@ def viewVendor(request):
 def updateInvoice(request, id):
     departments = Department.objects.filter(user=request.user)
     invoice = Invoice.objects.get(id=id)
-    form = InvoiceCreateForm(instance=invoice)
+    form = InvoiceCreateForm(instance=invoice, user=request.user)
 
     if request.method == "POST":
-        form = InvoiceCreateForm(request.POST, instance=invoice)
+        form = InvoiceCreateForm(
+            request.POST, instance=invoice, user=request.user)
 
         if form.is_valid():
             form.save()

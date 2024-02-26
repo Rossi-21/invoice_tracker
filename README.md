@@ -1,8 +1,12 @@
 # Invoice Tracking and Filtering App
 
-## Overview
+## About
 
 The Invoice Tracking and Filtering App is a web-based application developed using Django and Chartjs, designed to help users manage and filter invoices efficiently. The app provides features for creating invoices, vendors, and departments. Filtering invoices based on various criteria, and visualizing the data through graphs.
+
+## Why?
+
+"My team was tasked with controlling our supply spend for the year but was only given retroactive tools to visualize and understand our spend. I wanted something that could help me understand our spend in real-time so we could become more agile in our decision-making."
 
 ## Features
 
@@ -14,48 +18,26 @@ The Invoice Tracking and Filtering App is a web-based application developed usin
 
 ### **Prerequisites**
 
-- Python (version 3.6 or higher)
-- Django (version 3.0 or higher)
+- A working internet connection
 
-## **Installation**
+## **Registration**
 
-### **Clone the repository:**
+### **Visit:**
 
-```
-git clone https://github.com/Rossi-21/invoice-tracking-app.git
-```
+[Invoice Tracker](http://ec2-54-187-17-171.us-west-2.compute.amazonaws.com/register/)
 
-### **Install the required dependencies:**
+### **Create an Account:**
 
-```
-pip install -r requirements.txt
-```
-
-### **Apply migrations:**
-
-```
-python manage.py migrate
-```
-
-### **Create Superuser:**
-
-```
-python manage.py createsuperuser
-```
-
-### **Run the development server:**
-
-- ```
-  python manage.py runserver
-  ```
-- Open the app in your web browser: http://localhost:8000
+- Enter a username
+- Enter a valid email address
+- Create a vaild password
 
 ### **Usage**
 
-- Use the Get Started dropdown to create Vendors and Departments
-- Create new invoices using the "+Invoice" link.
-- Invoices can be edited or deleted via the admin panel
-- Visualize total spend by vendor and department through the provided links.
+- Use the Get Started dropdown to create Vendors, Departments, and Invoices.
+- Invoices can be edited or deleted via the edit link on the home page.
+- Departments and Vendors can be edited using the View dropdown.
+- Visit the Data dropdown to visualize your spend.
 
 ### **Code Structure**
 
@@ -63,11 +45,3 @@ python manage.py createsuperuser
 - **forms.py**: Defines forms for creating and filtering invoices.
 - **models.py**: Defines the data models for invoices, vendors, and departments.
 - **templates**: Contains HTML templates for rendering pages.
-
-### **Contributing**
-
-Contributions are not accepted at this time.
-
-### **License**
-
-This project is licensed under the MIT License.
